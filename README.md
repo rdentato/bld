@@ -10,7 +10,7 @@ The key idea is to define a function `older_then()` that checks whether a file i
 I've stressed his idea a little bit and decided to use bash (his suggestion was to use the Bourne shell for the maximum compatibility).
 
 ## Project structure
-The assumption is that the project is stored in a directory structure similar to this (with possibly sub-dirs):
+The assumption is that a project is stored in a directory structure similar to this (with possibly sub-dirs):
 
      top
       |-- src
@@ -27,21 +27,29 @@ The top directory must contain 2 scripts:
   
 all the other directories can contain a `bld.trg` that defines the target that can be built starting from that directory.
 
-A target is a function whose name starts with an underscore. For example:
+A *target* is a function whose name starts with an underscore. For example:
 
     _clean () {
        # Clean up commands here.
     }
     
 ## Command line options
-To build a target, you invoke the `bld` script. Assuming `bld` is in your path, the command:
+To build a target, you invoke the `bld` script.
 
+    bld [-d dirname] [-f trgfile] [-l | target]
+
+ Assuming `bld` is in your path, the command:
+
+```
     > bld clean
-    
+```
+
 will execute the `_clean` function (assuming it's defined in your `bld.trg` script). You can specify more than one target.
 To build a target that is in another directory you can use the `-d` switch. For example:
 
+```
     > bld -d test clean
+```
 
 will build the `clean` target as defined in the `test` directory.
 
@@ -49,8 +57,10 @@ Note that targets are just labels, they are not directly related to files.
 
 ## Functions
 
- - `bld [-d dir] [target ...]`
-   Builds the specified targets. If the `-d` flag is specified, the build is done in a new process.
+ - `bld [-d dir] [-f] [target ...]`
+   Builds the specified targets.
+   If the `-d` flag is specified, the build is started in the specified directory
+   as a new process.
        
  - `bld_old targ f1 f2 ...`
     Checks if the target file `targ` is older than its dependencoes `f1`, `f2`, ...
@@ -69,7 +79,7 @@ Note that targets are just labels, they are not directly related to files.
    will print on stderr the command before executing it
     
 ## Pseudo target
-Is sometimes desirable to not to have *pseudo*targets, i.e. targets that can be handled in a common way.
+Is sometimes desirable to have *pseudo*targets, i.e. targets that can be handled in a common way.
 
 You can define the function `_default()` that will handle any unknown target.
 
