@@ -112,10 +112,10 @@ fi
 
 if [ "$1" = "-l" ] ; then
   echo "Build targets:"
-  sed -n 's/_\(.*\) *().*/   \1/p' $bld__trgfile
+  sed -n -e 's/ *_\([^ ]*\) *()[ {]*\(#.*\)/   \1:  \2/p' -e 's/ *_\([^ ]*\) *().*/   \1:/p'  $bld__trgfile
   exit 0
 fi
-
+# 
 . $bld__trgfile
 bld $*
 

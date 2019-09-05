@@ -36,7 +36,7 @@ A *target* is a function whose name starts with an underscore. For example:
 ## Command line options
 To build a target, you invoke the `bld` script.
 
-    bld [-d dirname] [-f trgfile] [-l | target]
+    bld [-h] [-d dirname] [-f trgfile] [-l | target]
 
  Assuming `bld` is in your path, the command:
 
@@ -54,6 +54,11 @@ To build a target that is in another directory you can use the `-d` switch. For 
 will build the `clean` target as defined in the `test` directory.
 
 Note that targets are just labels, they are not directly related to files.
+
+```
+    > bld -l
+```
+will provide the list of available targets.
 
 ## Functions
 

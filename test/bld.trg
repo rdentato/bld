@@ -8,7 +8,7 @@ _all () {
   bld tests
 }
 
-_tests () {
+_tests () { # Compile each ut_xxx.c to t_xxx.exe
   local f
   local t
   CFLAGS="$CFLAGS -I../src -DDEBUG"
@@ -23,7 +23,7 @@ _tests () {
   done
 }
 
-_default () {
+_default () { # Compile uxxx.c files to xxx.exe 
   local f
   local t
   CFLAGS="$CFLAGS -I../src -DDEBUG"
