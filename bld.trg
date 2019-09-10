@@ -11,5 +11,6 @@ _all () {
 
 _clean () {
   bld -d lib clean
+  bld -d utl clean
   bld -d test clean
 }
