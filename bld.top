@@ -1,3 +1,4 @@
+#!/usr/bin/bash
 ##  (C) by Remo Dentato (rdentato@gmail.com)
 ##
 ## This software is distributed under the terms of the MIT license:
@@ -20,7 +21,7 @@ RM="rm -f"
 ## on msys (Windows) or Linux.
 
 _EXE=""
-if [ -x "$(which gcc).exe" ] ; then
+if [[ -x "$(which gcc).exe" ]] ; then
 _EXE=.exe
 fi
 
@@ -29,11 +30,11 @@ fi
 ## This is for programs that use my utl functions
 chk_utl_done=0
 chk_utl () {
-  if [ "$chk_utl_done" = "0" ] ; then
-    if [ -f $bld_top/utl/bld.trg ] ; then 
+  if [[ "$chk_utl_done" = "0" ]] ; then
+    if [[ -f $bld_top/utl/bld.trg ]] ; then 
       bld -d $bld_top/utl libutl
-      if [ -f $bld_top/utl/utl.h ] ; then CCFLAGS="$CCFLAGS -I $bld_top/utl/" ; fi
-      if [ -f $bld_top/utl/libutl.a ] ; then LIBS="$LIBS -lutl" ; LNFLAGS="$LNFLAGS -L $bld_top/utl/" ; fi
+      if [[ -f $bld_top/utl/utl.h ]] ; then CCFLAGS="$CCFLAGS -I $bld_top/utl/" ; fi
+      if [[ -f $bld_top/utl/libutl.a ]] ; then LIBS="$LIBS -lutl" ; LNFLAGS="$LNFLAGS -L $bld_top/utl/" ; fi
     fi
     chk_utl_done=1
   fi
@@ -48,7 +49,7 @@ cc_obj () {
   local src=$1
   local obj
   chk_utl
-  while [ "$src" != "" ] ; do
+  while [[ "$src" != "" ]] ; do
     src=${src%.*}.c
     obj=${src%.*}.o
     bld_old $obj $src && {

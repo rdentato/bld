@@ -1,3 +1,4 @@
+#!/usr/bin/bash
 ##  (C) by Remo Dentato (rdentato@gmail.com)
 ##
 ## This software is distributed under the terms of the MIT license:
@@ -9,13 +10,13 @@ _all () {
 }
 
 _libutl () {
-  UTLH=dbg.h
-  UTLC=""
+  UTLH=$(ls|grep ".h$"|grep -v "utl.h")
+  UTLC=$(ls|grep ".c$")
   bld_old utl.h $UTLH && {
     echo "cat $UTLH > utl.h"
     cat $UTLH > utl.h
   }
-  if [ "$UTLC" != "" ] ; then
+  if [[ "$UTLC" != "" ]] ; then
     bld_old libutl.a $UTLC $UTLH && {
        for f in $UTLC ; do
          bld_cmd $CC -O2 -Wall -DNDEBUG -c $f

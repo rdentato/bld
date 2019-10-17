@@ -1,3 +1,4 @@
+#!/usr/bin/bash
 ##  (C) by Remo Dentato (rdentato@gmail.com)
 ##
 ## This software is distributed under the terms of the MIT license:
