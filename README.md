@@ -44,6 +44,7 @@ To build a target, you invoke the `bld` script.
   Version: "0.1.3-beta" (0x0001003B)
   Options: -h              this help
            -f              force rebuild
+           -e              exit on error
            -l              list available targets
            -d dir          move to the specified directory before building
            -t file         load the specified target file (default: bld.trg)
