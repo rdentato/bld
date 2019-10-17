@@ -12,31 +12,44 @@ I've stressed his idea a little bit and decided to use bash (his suggestion was 
 ## Project structure
 The assumption is that a project is stored in a directory structure similar to this (with possibly sub-dirs):
 
-     top
-      |-- src
-      |-- doc
-      |-- test
-      |-- lib
-      |-- ...
-      |
+     (top dir)
+          |-- src
+          |-- doc
+          |-- test
+          |-- lib
+          |-- ...
+          |
       
 The top directory must contain 2 scripts:
 
   - `bld.top` with the global variables and common functions for the projects
   - `bld.trg` with the definition of the targets that can be built from the top directory.
-  
+   
 all the other directories can contain a `bld.trg` that defines the target that can be built starting from that directory.
 
-A *target* is a function whose name starts with an underscore. For example:
+The top directory is also a good place to store the `bld` script itself if it's not in your `PATH`.
 
+A *target* is a function whose name starts with an underscore. For example:
+```
     _clean () {
        # Clean up commands here.
     }
+```
     
 ## Command line options
 To build a target, you invoke the `bld` script.
 
-    bld [-h] [-d dirname] [-f trgfile] [-l | target]
+```
+  Usage: bld [options] [targets ...]
+  Version: "0.1.3-beta" (0x0001003B)
+  Options: -h              this help
+           -f              force rebuild
+           -l              list available targets
+           -d dir          move to the specified directory before building
+           -t file         load the specified target file (default: bld.trg)
+           -D "VAR=VALUE"  set the variable VAR to VALUE
+  Target defaults to 'all'
+```
 
  Assuming `bld` is in your path, the command:
 
